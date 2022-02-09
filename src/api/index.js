@@ -14,7 +14,7 @@ axios.interceptors.response.use(
   export default {
     quiz: {
       async writepost(post) {
-        return await axios.post("api/users/registration", user);
+        return await axios.post("api/quiz/getter", post);
       },
     }
 }
