@@ -35,17 +35,33 @@
         <p class="type">Тип {{ stat.forid }}</p>
         <select v-model="stat.status" class="select__variable" name="" id="">
           <option value="active">Активна</option>
-             <option value="nonactive">Неактивна</option>
+          <option value="nonactive">Неактивна</option>
         </select>
       </div>
       <button @click="addStatys()" class="add">Добавить тип</button>
     </div>
-    <button class="delete"> Удалить условие</button>
+    <button @click="deleteobj()" class="delete">Удалить условие</button>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    getter: {
+      type: Boolean,
+    },
+    id:{
+      type: [Number, String],
+      required: true,
+    }
+  },
+  mounted() {
+    const button = document.getElementById("create");
+    console.log(button);
+    button.addEventListener("click", () => {
+      this.emitter();
+    });
+  },
   data() {
     return {
       quizSelector: "default",
@@ -63,6 +79,25 @@ export default {
     };
   },
   methods: {
+    deleteobj(){
+      this.$emit('delete', this.id)
+    },
+    emitter() {
+      let obj = {};
+      if (this.quizSelector == "default") {
+        alert("Один или несколько параметров не выбраны");
+      } else if (this.quizSelector == "age") {
+        obj = this.dia;
+        this.$emit("getobject", obj);
+      } else if (this.quizSelector == "typeCard") {
+        obj = this.type;
+        this.$emit("getobject", obj);
+      } else if (this.quizSelector == "statusCard") {
+        obj = this.status;
+        this.$emit("getobject", obj);
+      }
+      return 0;
+    },
     addDia() {
       this.counter += 1;
       const newdia = {
@@ -98,7 +133,9 @@ export default {
 <style>
 .quiz__item__cont {
   width: 100%;
-  padding-top: 20px;
+  padding: 20px 40px;
+   box-shadow: 0 9px 0px 0px #ffffff, 0 -9px 0px 0px #ffffff, 12px 0 15px -4px rgba(119, 119, 119, 0.97), -12px 0 15px -4px rgba(155, 155, 155, 0.97);
+  border-bottom: 1.3px solid rgb(165, 165, 165);
 }
 .variable {
   display: inline-block;
@@ -129,14 +166,19 @@ export default {
 .add {
   background-color: transparent;
   margin-top: 25px;
-  border: 1px solid rgb(0, 161, 40);
+  border: 1px solid #9cb836;
   border-radius: 4px;
   height: 35px;
   width: 120px;
   text-align: center;
-  color: rgb(0, 161, 40);
+  color: #9cb836;
   cursor: pointer;
   margin-left: 11vw;
+  transition: all 0.5s;
+}
+.add:hover {
+background-color: #9cb836;
+color: white;
 }
 .forinpute {
   display: inline-block;
@@ -147,14 +189,26 @@ export default {
   margin-left: 27px;
 }
 .delete {
-    display: block;
-      background-color: transparent;
-  border: 1px solid rgb(207, 1, 1);
+  display: block;
+  background-color: transparent;
+  border: 1px solid #ff1001;
   border-radius: 4px;
   height: 35px;
   width: 120px;
   text-align: center;
-  color: rgb(207, 1, 1);
+  color: #ff1001;
   cursor: pointer;
+  margin-left: auto;
+  margin-top: 20px;
+  margin-left: auto;
+  transition: all 0.5s;
+}
+.delete:hover {
+background-color: #ff1201a6;
+color: white;
+}
+.delete:active {
+  border: 1px solid #c4c4c4;
+  background-color: #830900a6;
 }
 </style>

@@ -22,5 +22,10 @@
     text-align: center;
     width: 100%;
     height: 80px;
+    border: 0.5px solid rgba(212, 212, 212, 0.5);
+    margin-top: 10px;
+    border-radius: 5px;
+    padding-top: 50px;
+    font-weight: bold;
 }
 </style>
