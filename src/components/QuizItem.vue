@@ -1,5 +1,6 @@
 <template>
   <div class="quiz__item__cont">
+    <div class="And" v-if="id != '1'">И</div>
     <p class="variable">Условие</p>
     <select v-model="quizSelector" class="select__variable" name="" id="">
       <option value="default">Выберите условие</option>
@@ -50,10 +51,10 @@ export default {
     getter: {
       type: Boolean,
     },
-    id:{
+    id: {
       type: [Number, String],
       required: true,
-    }
+    },
   },
   mounted() {
     const button = document.getElementById("create");
@@ -79,8 +80,8 @@ export default {
     };
   },
   methods: {
-    deleteobj(){
-      this.$emit('delete', this.id)
+    deleteobj() {
+      this.$emit("delete", this.id);
     },
     emitter() {
       let obj = {};
@@ -133,9 +134,8 @@ export default {
 <style>
 .quiz__item__cont {
   width: 100%;
-  padding: 20px 40px;
-   box-shadow: 0 9px 0px 0px #ffffff, 0 -9px 0px 0px #ffffff, 12px 0 15px -4px rgba(119, 119, 119, 0.97), -12px 0 15px -4px rgba(155, 155, 155, 0.97);
-  border-bottom: 1.3px solid rgb(165, 165, 165);
+  padding: 8px 40px;
+  border-bottom: 1px solid rgb(165, 165, 165);
 }
 .variable {
   display: inline-block;
@@ -177,8 +177,8 @@ export default {
   transition: all 0.5s;
 }
 .add:hover {
-background-color: #9cb836;
-color: white;
+  background-color: #9cb836;
+  color: white;
 }
 .forinpute {
   display: inline-block;
@@ -204,11 +204,23 @@ color: white;
   transition: all 0.5s;
 }
 .delete:hover {
-background-color: #ff1201a6;
-color: white;
+  background-color: #ff1201a6;
+  color: white;
 }
 .delete:active {
   border: 1px solid #c4c4c4;
   background-color: #830900a6;
+}
+.And {
+  position: relative;
+  top: -35px;
+  width: 60px;
+  height: 50px;
+  border: 1px solid #9cb836b0;
+  border-radius: 5px;
+  background-color: #9cb836b0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

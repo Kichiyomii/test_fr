@@ -27,6 +27,7 @@
 
 <script>
 import QuizItem from "../components/QuizItem";
+import api from "../api"
 export default {
   components: {
     QuizItem,
@@ -43,8 +44,11 @@ export default {
     deleteobj(data) {
       this.items = this.items.filter((p) => p.id !== data);
     },
-    sendler() {
-      console.log(this.arr);
+    //Здесь запрос на Api, только у меня нет вашего api, поэтому я сделаю запрос в никуда с выводом в консоль
+    async sendler() {
+        const post = this.arr
+        console.log(post)
+        const response = await api.quiz.writepost(post) 
     },
     getobj(data) {
       this.arr.push(data);
